@@ -1,10 +1,4 @@
-from enum import Enum
-
-
-class Direction(Enum):
-    Left = 1
-    Right = 2
-
+from direction import Direction
 
 class Tape:
     def __init__(self, word, alphabet):
@@ -24,8 +18,11 @@ class Tape:
             return
         self._tape[self.head_position] = character
 
+        if self.head_position == len(self._tape) - 1:
+            self._tape += '#'
+
     def read(self):
-        if self.head_position < 0 or self.head_position > len(self._tape):
+        if self.head_position < 0 or self.head_position > len(self._tape) - 1:
             raise Exception('Trying to read character at invalid position: ' + self.head_position)
         return self._tape[self.head_position]
 
