@@ -86,7 +86,7 @@ def test_move_head_past_end(empty_tape):
     empty_tape.move_head(Direction.Right)
 
     assert empty_tape.head_position == 3
-    assert empty_tape.get_tape() == '$##'
+    assert empty_tape.get_tape() == '$#'
 
 
 def is_empty(tape):

@@ -18,7 +18,8 @@ class Tape:
             return
         self._tape[self.head_position] = character
 
-        if self.head_position == len(self._tape) - 1:
+        last_item_index = len(self._tape) - 1
+        if self.head_position == last_item_index:
             self._tape += '#'
 
     def read(self):
@@ -27,6 +28,7 @@ class Tape:
         return self._tape[self.head_position]
 
     def get_tape(self):
+        self._remove_trailing_sharps()
         return ''.join(self._tape)
 
     def move_head(self, direction):
@@ -39,3 +41,13 @@ class Tape:
             self._tape += '#'
         if self.head_position < 0:
             self.head_position = 0
+
+    def get_length(self):
+        return len(self._tape)
+
+    def _remove_trailing_sharps(self):
+        for i in range(len(self._tape) - 1, 1, -1):
+            if self._tape[i] == '#' and self._tape[i-1] == '#':
+                del self._tape[-1:]
+            else:
+                break
